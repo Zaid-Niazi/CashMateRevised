@@ -1,0 +1,106 @@
+*{
+  box-sizing: border-box;
+
+}
+
+
+body {
+  font-family: Arial, sans-serif; /* Modern font */
+  color: #333; /* Dark color for text */
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  text-align: center; /* Center aligns the content */
+
+}
+
+.table {
+    display: inline-table; /* Makes the table an inline-level block container */
+    margin: 0 auto; /* Center the table horizontally */
+    border-collapse: collapse;
+}
+
+
+ 
+input{
+  border: 1px solid black;
+  width: 215px;  
+  font-size: 50px;
+  text-align: center;
+  padding: 0%;
+ }
+
+ .table input {
+  margin: 0;
+  padding: 0;
+  /* Add other shared styles for input fields here */
+}
+ 
+
+ .statusMsg {
+  font-size: 20px;      /* Example font size */
+  box-sizing: border-box;
+  padding: 5px, 0;   
+  border-style: none;
+
+  min-height: 40px;   /* Minimum height */
+  max-height: 60px; 
+}
+
+@media (max-width: 767px) {
+  input {
+      width: 100px;
+      font-size: 20px;
+  }
+
+  .statusMsg {
+      font-size: 15px;
+  }
+
+  .table {
+      width: 100%;
+      margin: 0;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  input {
+      width: 150px;
+      font-size: 30px;
+  }
+
+  .statusMsg {
+      font-size: 20px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1600px) {
+  input {
+      width: 180px;
+      font-size: 40px;
+  }
+
+  .statusMsg {
+      font-size: 22px;
+  }
+
+  .table {
+      width: 90%;
+      margin: 0 auto;
+  }
+}
+
+@media (min-width: 1601px) {
+  input {
+      width: 250px;
+      font-size: 60px;
+  }
+
+  .statusMsg {
+      font-size: 30px;
+  }
+}
+
+
