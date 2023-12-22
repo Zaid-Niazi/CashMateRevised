@@ -42,6 +42,56 @@ document.querySelector('.input.x1.y5').readOnly = true;
 document.querySelector('.input.x2.y5').readOnly = true;
 document.querySelector('.input.x3.y5').readOnly = true;
 
+
+for (let i = 6; i <= 14; i++) {
+    const selectable = document.querySelector(`.input.x3.y${i}`);
+    if (selectable) {
+      selectable.classList.add('selectable');
+    }
+  }
+  
+  document.addEventListener('DOMContentLoaded', () => {
+    const inputOrder = [
+      '.input.x2.y2', 
+      '.input.x3.y6', 
+      '.input.x3.y7', 
+      '.input.x3.y8', 
+      '.input.x3.y9', 
+      '.input.x3.y10', 
+      '.input.x3.y11', 
+      '.input.x3.y12', 
+      '.input.x3.y13', 
+      '.input.x3.y14'
+    ];
+  
+    // Set initial focus
+    document.querySelector(inputOrder[0]).focus();
+  
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const activeElement = document.activeElement;
+        const currentIndex = inputOrder.findIndex(selector => activeElement.matches(selector));
+  
+        let nextIndex;
+        if (e.shiftKey) {
+          // Shift+Tab: Move to previous element
+          nextIndex = (currentIndex - 1 + inputOrder.length) % inputOrder.length;
+        } else {
+          // Tab: Move to next element
+          nextIndex = (currentIndex + 1) % inputOrder.length;
+        }
+        
+        document.querySelector(inputOrder[nextIndex]).focus();
+      }
+    });
+  });
+  
+
+
+
+  
+
 let statusMsg = document.querySelector('.input.x3.y1')
 
 
