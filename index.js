@@ -64,7 +64,6 @@ for (let i = 6; i <= 14; i++) {
       '.input.x3.y14'
     ];
   
-    // Set initial focus
     document.querySelector(inputOrder[0]).focus();
   
     document.addEventListener('keydown', (e) => {
@@ -75,10 +74,8 @@ for (let i = 6; i <= 14; i++) {
   
         let nextIndex;
         if (e.shiftKey) {
-          // Shift+Tab: Move to previous element
           nextIndex = (currentIndex - 1 + inputOrder.length) % inputOrder.length;
         } else {
-          // Tab: Move to next element
           nextIndex = (currentIndex + 1) % inputOrder.length;
         }
         
