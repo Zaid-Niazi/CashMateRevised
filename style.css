@@ -45,7 +45,6 @@ input{
   padding: 5px, 0;   
   border-style: none;
 
-  min-height: 40px;   /* Minimum height */
   max-height: 60px; 
 }
 

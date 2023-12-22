@@ -21,18 +21,24 @@ const setLabels = (labels, classNames) => {
     });
 };
 
-setLabels(['DIFF:', 'Required:', 'Received:', 'Note:', '2000', '500', '200', '100', '50', '20', '10', '5', '2', '1'],
-          ['.input.x1.y1', '.input.x1.y2', '.input.x1.y3', '.input.x1.y4', '.input.x1.y5', '.input.x1.y6', '.input.x1.y7', '.input.x1.y8', '.input.x1.y9', '.input.x1.y10', '.input.x1.y11', '.input.x1.y12', '.input.x1.y13', '.input.x1.y14']);
+setLabels(['DIFF:', 'Required:', 'Received:', 'Note:', '2000', '500', 
+           '200', '100', '50', '20', '10', '5', '2', '1'],
+          ['.input.x1.y1', '.input.x1.y2', '.input.x1.y3',
+           '.input.x1.y4', '.input.x1.y5', '.input.x1.y6', 
+           '.input.x1.y7', '.input.x1.y8', '.input.x1.y9', 
+           '.input.x1.y10','.input.x1.y11','.input.x1.y12', 
+           '.input.x1.y13','.input.x1.y14']);
 
-setLabels(['0', '0', '0', 'AMT', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0'],
-          ['.input.x2.y1', '.input.x2.y2', '.input.x2.y3', '.input.x2.y4', '.input.x2.y5', '.input.x2.y6', '.input.x2.y7', '.input.x2.y8', '.input.x2.y9', '.input.x2.y10', '.input.x2.y11', '.input.x2.y12', '.input.x2.y13', '.input.x2.y14']);
+setLabels(['0', '0', '0', 'AMT', '0', '0', '0', '0', '0', '0', '0', '0'
+         , '0', '0'],
+          ['.input.x2.y1', '.input.x2.y2', '.input.x2.y3', '.input.x2.y4'
+          , '.input.x2.y5', '.input.x2.y6', '.input.x2.y7', '.input.x2.y8'
+          , '.input.x2.y9','.input.x2.y10','.input.x2.y11','.input.x2.y12',
+           '.input.x2.y13', '.input.x2.y14']);
 
 document.querySelector('.input.x2.y2').readOnly = false;
 
 let statusMsg = document.querySelector('.input.x3.y1')
-statusMsg.style.minHeight = '60px'; 
-statusMsg.style.fontSize = '25px'; 
-
 
 
 statusMsg.classList.add('statusMsg')
@@ -101,6 +107,7 @@ const addEventHandler = (constantSelector, amountSelector, inputSelector) => {
     const constant = document.querySelector(constantSelector);
     const amount = document.querySelector(amountSelector);
     const input = document.querySelector(inputSelector);
+    input.type='number';
 
     input.addEventListener('input', event => {
         amount.value = event.target.value * constant.value;
@@ -108,7 +115,6 @@ const addEventHandler = (constantSelector, amountSelector, inputSelector) => {
     });
 };
 
-addEventHandler('.input.x1.y5', '.input.x2.y5', '.input.x3.y5');
 addEventHandler('.input.x1.y6', '.input.x2.y6', '.input.x3.y6')
 addEventHandler('.input.x1.y7', '.input.x2.y7', '.input.x3.y7')
 addEventHandler('.input.x1.y8', '.input.x2.y8', '.input.x3.y8')
