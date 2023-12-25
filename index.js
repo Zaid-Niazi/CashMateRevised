@@ -64,7 +64,9 @@ for (let i = 6; i <= 14; i++) {
       '.input.x3.y14'
     ];
   
-    document.querySelector(inputOrder[0]).focus();
+    const firstInput = document.querySelector(inputOrder[0]);
+    firstInput.focus();
+    firstInput.select();
   
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Tab') {
@@ -78,11 +80,14 @@ for (let i = 6; i <= 14; i++) {
         } else {
           nextIndex = (currentIndex + 1) % inputOrder.length;
         }
-        
-        document.querySelector(inputOrder[nextIndex]).focus();
+  
+        const nextInput = document.querySelector(inputOrder[nextIndex]);
+        nextInput.focus();
+        nextInput.select();
       }
     });
   });
+  
   
 
 
