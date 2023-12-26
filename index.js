@@ -88,14 +88,13 @@ for (let i = 6; i <= 14; i++) {
     });
   });
   
+
+
   
 
-
-
-  
-
-let statusMsg = document.querySelector('.input.x3.y1')
-
+const statusMsg = document.querySelector('.input.x3.y1')
+const amt = document.querySelector('.input.x3.y2')
+const amt2 = document.querySelector('.input.x3.y3')
 
 statusMsg.classList.add('statusMsg')
 statusMsg.setAttribute('readonly', 'readonly')
@@ -103,6 +102,10 @@ const reqBtn =  document.querySelector('.input.x1.y2');
 reqBtn.addEventListener('click', ()=>{
   document.querySelector('.input.x2.y2').value = 0;
   document.querySelector('.input.x2.y1').value = 0;
+  statusMsg.value= ""
+  
+  amt.value= ""
+  amt2.value=""
 })
 const clear = document.querySelector('.input.x3.y4');
 clear.value = "Clear";
@@ -122,19 +125,25 @@ const updateTotalsAndDifference = () => {
   if(requiredAmount !== 0){
       if(totalReceived === requiredAmount){
           statusMsg.value = "Correct!";
+          amt.value = `Rs.${Math.abs(difference)}`
+          amt2.value = '✅'
+
           statusMsg.style.backgroundColor = "#6aff00";
       } else if(totalReceived > requiredAmount){
        
-          statusMsg.value = `Return Rs.${Math.abs(difference)}`;
+          statusMsg.value = `Return`;
+          amt.value = `Rs.${Math.abs(difference)}`
           statusMsg.style.backgroundColor = "yellow";
 
       } else {
-          statusMsg.value = `Ask For Rs.${Math.abs(difference)}`;
+          statusMsg.value = `Ask For`;
+          amt.value = `Rs.${Math.abs(difference)}`
+          amt2.value = '❌'
           statusMsg.style.backgroundColor = "red";
 
       }
   } else {
-      statusMsg.value = "Enter Required Amt";
+      statusMsg.value = "Required?";
       statusMsg.style.backgroundColor = "#e7f0e1"
   }
 };
@@ -151,6 +160,9 @@ clear.addEventListener('click', () => {
   const entriesX2 = Array.from({ length: 10 }, (_, i) => 
                 document.querySelector(`.input.x2.y${i + 6}`));
   entriesX2.forEach(entry => entry.value = '0');
+
+  amt.value= ""
+  amt2.value=""
 
   updateTotalsAndDifference();
 });
