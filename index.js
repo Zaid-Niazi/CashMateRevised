@@ -1,8 +1,6 @@
 const container = document.querySelector('.container');
 const table = document.querySelector('.table');
 
-
-
 for (let i = 1; i <= 15; i++) {
     const tr = document.createElement('tr');
     for (let j = 1; j <= 3; j++) {
@@ -29,28 +27,29 @@ setLabels(['DIFF:', 'Required:', 'Received:', 'Note:', '500',
            '.input.x1.y10','.input.x1.y11','.input.x1.y12', 
            '.input.x1.y13','.input.x1.y14']);
 
-setLabels(['0', '0', '0', 'AMT', '0', '0', '0', '0', '0', '0', '0'
-         , '0', '0'],
-          ['.input.x2.y1', '.input.x2.y2', '.input.x2.y3', '.input.x2.y4'
-          , '.input.x2.y6', '.input.x2.y7', '.input.x2.y8'
-          , '.input.x2.y9','.input.x2.y10','.input.x2.y11','.input.x2.y12',
+setLabels(['0', '0', '0', 'AMT', '0', '0', '0', '0', '0', '0', '0',
+           '0', '0'],
+          ['.input.x2.y1', '.input.x2.y2', '.input.x2.y3', '.input.x2.y4',
+           '.input.x2.y6', '.input.x2.y7', '.input.x2.y8',
+           '.input.x2.y9','.input.x2.y10','.input.x2.y11','.input.x2.y12',
            '.input.x2.y13', '.input.x2.y14']);
 
-       
 document.querySelector('.input.x2.y2').readOnly = false;
 document.querySelector('.input.x1.y5').readOnly = true;
 document.querySelector('.input.x2.y5').readOnly = true;
 document.querySelector('.input.x3.y5').readOnly = true;
-
+document.querySelector('.x1.y15').readOnly = true;
+document.querySelector('.x2.y15').readOnly = true;
+document.querySelector('.x3.y15').readOnly = true;
 
 for (let i = 6; i <= 14; i++) {
     const selectable = document.querySelector(`.input.x3.y${i}`);
     if (selectable) {
       selectable.classList.add('selectable');
     }
-  }
-  
-  document.addEventListener('DOMContentLoaded', () => {
+}
+
+document.addEventListener('DOMContentLoaded', () => {
     const inputOrder = [
       '.input.x2.y2', 
       '.input.x3.y6', 
@@ -86,31 +85,37 @@ for (let i = 6; i <= 14; i++) {
         nextInput.select();
       }
     });
-  });
   
-
-
+    // Dark mode toggle functionality
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    if (darkModeToggle) {
+      darkModeToggle.addEventListener('click', () => {
+        document.body.classList.toggle('dark-mode');
+      });
+    }
+});
   
+const statusMsg = document.querySelector('.input.x3.y1');
+const amt = document.querySelector('.input.x3.y2');
+const amt2 = document.querySelector('.input.x3.y3');
 
-const statusMsg = document.querySelector('.input.x3.y1')
-const amt = document.querySelector('.input.x3.y2')
-const amt2 = document.querySelector('.input.x3.y3')
+statusMsg.classList.add('statusMsg');
+statusMsg.setAttribute('readonly', 'readonly');
 
-statusMsg.classList.add('statusMsg')
-statusMsg.setAttribute('readonly', 'readonly')
 const reqBtn =  document.querySelector('.input.x1.y2');
-reqBtn.addEventListener('click', ()=>{
+reqBtn.addEventListener('click', () => {
   document.querySelector('.input.x2.y2').value = 0;
   document.querySelector('.input.x2.y1').value = 0;
-  statusMsg.value= ""
+  statusMsg.value = "";
   
-  amt.value= ""
-  amt2.value=""
-})
+  amt.value = "";
+  amt2.value = "";
+});
+
 const clear = document.querySelector('.input.x3.y4');
 clear.value = "Clear";
 clear.classList = 'clearBtn';
-clear.setAttribute('readonly', 'readonly')
+clear.setAttribute('readonly', 'readonly');
 
 const updateTotalsAndDifference = () => {
   const totalReceived = Array.from({ length: 10 }, (_, i) => 
@@ -122,35 +127,27 @@ const updateTotalsAndDifference = () => {
   document.querySelector('.input.x2.y3').value = totalReceived;
   document.querySelector('.input.x2.y1').value = difference;
 
-  if(requiredAmount !== 0){
-      if(totalReceived === requiredAmount){
+  if (requiredAmount !== 0) {
+      if (totalReceived === requiredAmount) {
           statusMsg.value = "Correct!";
-          amt.value = `Rs.${Math.abs(difference)}`
-          amt2.value = '✅'
-
+          amt.value = `Rs.${Math.abs(difference)}`;
+          amt2.value = '✅';
           statusMsg.style.backgroundColor = "#6aff00";
-      } else if(totalReceived > requiredAmount){
-       
+      } else if (totalReceived > requiredAmount) {
           statusMsg.value = `Return`;
-          amt.value = `Rs.${Math.abs(difference)}`
+          amt.value = `Rs.${Math.abs(difference)}`;
           statusMsg.style.backgroundColor = "yellow";
-
       } else {
           statusMsg.value = `Ask For`;
-          amt.value = `Rs.${Math.abs(difference)}`
-          amt2.value = '❌'
+          amt.value = `Rs.${Math.abs(difference)}`;
+          amt2.value = '❌';
           statusMsg.style.backgroundColor = "red";
-
       }
   } else {
       statusMsg.value = "Required?";
-      statusMsg.style.backgroundColor = "#e7f0e1"
+      statusMsg.style.backgroundColor = "#e7f0e1";
   }
 };
-
-
-
-
 
 clear.addEventListener('click', () => {
   const entriesX3 = Array.from({ length: 10 }, (_, i) => 
@@ -161,21 +158,17 @@ clear.addEventListener('click', () => {
                 document.querySelector(`.input.x2.y${i + 6}`));
   entriesX2.forEach(entry => entry.value = '0');
 
-  amt.value= ""
-  amt2.value=""
+  amt.value = "";
+  amt2.value = "";
 
   updateTotalsAndDifference();
 });
-
-
-
-
 
 const addEventHandler = (constantSelector, amountSelector, inputSelector) => {
     const constant = document.querySelector(constantSelector);
     const amount = document.querySelector(amountSelector);
     const input = document.querySelector(inputSelector);
-    input.type='number';
+    input.type = 'number';
 
     input.addEventListener('input', event => {
         amount.value = event.target.value * constant.value;
@@ -183,21 +176,14 @@ const addEventHandler = (constantSelector, amountSelector, inputSelector) => {
     });
 };
 
-addEventHandler('.input.x1.y6', '.input.x2.y6', '.input.x3.y6')
-addEventHandler('.input.x1.y7', '.input.x2.y7', '.input.x3.y7')
-addEventHandler('.input.x1.y8', '.input.x2.y8', '.input.x3.y8')
-addEventHandler('.input.x1.y9', '.input.x2.y9', '.input.x3.y9')
-addEventHandler('.input.x1.y10', '.input.x2.y10', '.input.x3.y10')
-addEventHandler('.input.x1.y11', '.input.x2.y11', '.input.x3.y11')
-addEventHandler('.input.x1.y12', '.input.x2.y12', '.input.x3.y12')
-addEventHandler('.input.x1.y13', '.input.x2.y13', '.input.x3.y13')
+addEventHandler('.input.x1.y6', '.input.x2.y6', '.input.x3.y6');
+addEventHandler('.input.x1.y7', '.input.x2.y7', '.input.x3.y7');
+addEventHandler('.input.x1.y8', '.input.x2.y8', '.input.x3.y8');
+addEventHandler('.input.x1.y9', '.input.x2.y9', '.input.x3.y9');
+addEventHandler('.input.x1.y10', '.input.x2.y10', '.input.x3.y10');
+addEventHandler('.input.x1.y11', '.input.x2.y11', '.input.x3.y11');
+addEventHandler('.input.x1.y12', '.input.x2.y12', '.input.x3.y12');
+addEventHandler('.input.x1.y13', '.input.x2.y13', '.input.x3.y13');
 addEventHandler('.input.x1.y14', '.input.x2.y14', '.input.x3.y14');
 
 document.querySelector('.input.x2.y2').addEventListener('input', updateTotalsAndDifference);
-
-
-
-
-
-
-
